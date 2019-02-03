@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<questions>
+  <question time="2">
+    <text>How many bytes is a kilobyte?</text>
+    <variants>
+      <variant>1000</variant>
+      <variant>2048</variant>
+      <variant right="true">1024</variant>
+      <variant>512</variant>
+    </variants>
+  </question>
+  <question time="1">
+    <text>How many month is in the year?</text>
+    <variants>
+      <variant>10</variant>
+      <variant right="true">12</variant>
+      <variant>15</variant>
+      <variant>11</variant>
+    </variants>
+  </question>
+  <question time="3">
+    <text>What is the capital of Japan</text>
+    <variants>
+      <variant right="true">Tokyo</variant>
+      <variant>Paris</variant>
+      <variant>Kiev</variant>
+      <variant>Moscow</variant>
+    </variants>
+  </question>
+</questions>
