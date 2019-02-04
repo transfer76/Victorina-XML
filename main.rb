@@ -6,9 +6,9 @@ game = Game.new(Reader.read_from_xml)
 
 puts 'Let go! Answer the questions!'
 
-while game.current_index < game.questions.size
+until game.finished?
 
-  puts "Time to answer #{game.present_question.time} min"
+  puts "Time to answer #{game.timer} min"
 
   puts game.present_question.question
 
@@ -16,13 +16,5 @@ while game.current_index < game.questions.size
 
   user_input = STDIN.gets.capitalize.chomp
 
-  right_answer = game.present_question.right_answer
-
-  if user_input == right_answer
-    puts "Ok"
-  else
-    puts "Wrong. Right answer is #{right_answer}"
-  end
-
-  game.count
+  game.check_answer(user_input)
 end
