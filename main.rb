@@ -1,49 +1,28 @@
-require 'rexml/document'
+require_relative 'lib/question'
+require_relative 'lib/reader'
+require_relative 'lib/game'
 
-questions_path = "#{__dir__}/data/questions.xml"
-doc = File.open(questions_path) { |file| REXML::Document.new(file)}
-
-current_index = 0
-
-questions = []
-answers = []
-right_answers = []
-time_answer = []
-
-doc.elements.each('//text') do |item|
-  questions << item.text
-end
-
-doc.elements.each('///variant') do |item|
-  answers << item.text
-end
-
-doc.elements.each('///variant[@right]') do |item|
-  right_answers << item.text
-end
-
-doc.elements.each('questions/question') do |item|
-  time_answer << item.attributes['time']
-end
+game = Game.new(Reader.read_from_xml)
 
 puts 'Let go! Answer the questions!'
 
-while current_index < questions.size
-  puts questions[current_index]
+while game.current_index < game.questions.size
 
-  answers.slice!(0..3).each_with_index{ |item, i| puts "#{i + 1} #{item}"}
+  puts "Time to answer #{game.present_question.time} min"
 
-  puts "Time to answer #{time_answer[current_index]} min"
+  puts game.present_question.question
 
-  user_answer = STDIN.gets.capitalize.chomp
+  puts game.present_question.answers
 
-  correct_answer = right_answers[current_index]
+  user_input = STDIN.gets.capitalize.chomp
 
-  if user_answer == correct_answer
-    puts 'Ok'
+  right_answer = game.present_question.right_answer
+
+  if user_input == right_answer
+    puts "Ok"
   else
-    puts "Not Ok. Right answer #{correct_answer}"
+    puts "Wrong. Right answer is #{right_answer}"
   end
 
-  current_index += 1
+  game.count
 end
