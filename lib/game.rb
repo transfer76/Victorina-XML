@@ -1,26 +1,40 @@
 class Game
-  attr_reader :questions, :right_answer, :time
+  attr_reader :questions, :count
 
   def initialize(questions)
     @questions = questions
     @current_index = 0
+    @count = 0
   end
 
   def present_question
     @questions[@current_index]
   end
 
-  def right_answer?
-    @right_answer = present_question.right_answer
+  def timer
+    present_question.time
   end
 
-  def timer
-    @time = present_question.time
+  def ask_question
+    present_question.question
   end
+
+  def show_variants
+    present_question.answers.each.with_index { |answer, i| puts "#{i + 1}.#{answer}" }
+  end
+
+  def right_answer
+    present_question.right_answer
+  end
+
 
   def check_answer(user_input)
-    puts 'Ok' if user_input == right_answer?
-    puts "Wrong. Right answer is #{right_answer?}" if user_input != right_answer?
+    if present_question.answers[user_input - 1] == right_answer
+      puts 'Ok'
+      @count += 1
+    else
+      puts "Wrong. Right answer is #{right_answer}"
+    end
 
     @current_index += 1
   end
