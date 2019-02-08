@@ -15,7 +15,7 @@ class Game
     present_question.time
   end
 
-  def ask_question
+  def current_question
     present_question.question
   end
 

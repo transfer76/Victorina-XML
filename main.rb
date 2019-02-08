@@ -11,7 +11,7 @@ until game.finished?
   puts "Time to answer #{game.timer} min"
   puts
 
-  puts game.ask_question
+  puts game.current_question
 
   game.show_variants
 
